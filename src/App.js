@@ -8,6 +8,7 @@ import HouseDoorCard from './houseDoorCard'
 import TankLevelCard from './tankLevelCard'
 import WeatherCard from './weatherCard'
 import StatusBar from './statusBar'
+import EnvironmentMonitor from './environmentMonitor'
 
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -50,7 +51,7 @@ export default class App extends React.Component {
       levels.x.push(now.toISOString())
       levels.y.push(lvl)
       levels.revision = this.state.tankLevels.revision + 1
-      this.setState({tankLevels: levels})
+      this.setState({ tankLevels: levels })
 
     }, 1600);
 
@@ -82,12 +83,15 @@ export default class App extends React.Component {
         <StatusBar openControls={this.openControlPanel.bind(this)} state={this.state} />
         <Container>
           <Row>
-            <GarageDoorCard LeftOpen={this.state.garageDoors.left} RightOpen={this.state.garageDoors.right} />
-            <HouseDoorCard DiningRoomOpen={this.state.houseDoors.diningRoom} FrontOpen={this.state.houseDoors.front} KitchenOpen={this.state.houseDoors.kitchen} />
-            <TankLevelCard level={this.state.tankLevel} levels={this.state.tankLevels}/>
-          </Row>
-          <Row>
-            <WeatherCard />
+            <Col xs="4">
+              <WeatherCard />
+            </Col>
+            <Col xs="8">
+              <GarageDoorCard LeftOpen={this.state.garageDoors.left} RightOpen={this.state.garageDoors.right} />
+              <HouseDoorCard DiningRoomOpen={this.state.houseDoors.diningRoom} FrontOpen={this.state.houseDoors.front} KitchenOpen={this.state.houseDoors.kitchen} />
+              <TankLevelCard level={this.state.tankLevel} levels={this.state.tankLevels} />
+              <EnvironmentMonitor />
+            </Col>
           </Row>
         </Container>
         <MydModalWithGrid show={this.state.showControlPanel} onHide={() => this.setState({ showControlPanel: false })} />

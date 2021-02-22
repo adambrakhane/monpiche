@@ -31,7 +31,7 @@ class WeatherCard extends React.Component {
             .then((result) => {
                 this.setState({ weather: result, lastUpdated: dateDisplay() });
                 console.log(JSON.stringify(result));
-                
+
 
             });
 
@@ -39,29 +39,119 @@ class WeatherCard extends React.Component {
     }
 
     render() {
-        return (
+        var iconURL = ""
+        var now = new Date()
+        var weatherDescription = ""
+        var extraClasses = ""
 
-            <div class="col-4">
+        if (typeof this.state.weather.main != "undefined") {
+            // Night or day?
+            if (now.getHours() > 20 || now.getHours() < 6) {
+                extraClasses += " night"
+            } else {
+                extraClasses += " day"
+            }
+
+            // Very hot or cold?
+            if (this.state.weather.main.temp > 85) {
+                extraClasses += " hot"
+            } else if (this.state.weather.main.temp < 55) {
+                extraClasses += " cold"
+            }
+
+            // Type of weather
+            var weatherID = this.state.weather.weather[0].id
+            if (weatherID >= 200 && weatherID < 300) {
+                // Thunderstorm
+                weatherDescription = "T-Storms"
+                extraClasses += " storm"
+            } else if (weatherID < 400) {
+                // Drizzle
+                weatherDescription = "Drizzle"
+                extraClasses += " fog"
+            } else if (weatherID < 600) {
+                // Rain
+                weatherDescription = "Rain"
+                extraClasses += " storm"
+            } else if (weatherID === 701) {
+                // Mist
+                weatherDescription = "Mist"
+                extraClasses += " fog"
+            } else if (weatherID === 711) {
+                // Smoke
+                weatherDescription = "Smoke"
+                extraClasses += " smoke"
+            } else if (weatherID === 721) {
+                // Haze
+                weatherDescription = "Haze"
+                extraClasses += " fog"
+            } else if (weatherID === 731) {
+                // Dust
+                weatherDescription = "Dust"
+                extraClasses += " smoke"
+            } else if (weatherID === 741) {
+                // Fog
+                weatherDescription = "Fog"
+                extraClasses += " fog"
+            } else if (weatherID === 751) {
+                // Sand
+                weatherDescription = "Sand"
+                extraClasses += " smoke"
+            } else if (weatherID === 761) {
+                // Dust
+                weatherDescription = "Dust"
+                extraClasses += " smoke"
+            } else if (weatherID === 762) {
+                // Volcanic Ash
+                weatherDescription = "Volcanic Ash"
+                extraClasses += " smoke"
+            } else if (weatherID === 771) {
+                // Squall
+                weatherDescription = "Squall"
+                extraClasses += " wind"
+            } else if (weatherID === 781) {
+                // Tornado
+                weatherDescription = "Tornado"
+                extraClasses += " wind"
+            } else if (weatherID === 800) {
+                // Clear
+                weatherDescription = "Clear"
+                extraClasses += " clear"
+            } else if (weatherID === 801) {
+                // Clear
+            weatherDescription = "Some Clouds"
+                extraClasses += " cloudy"
+            } else if (weatherID === 802) {
+                // Clear
+                weatherDescription = "Scattered Clouds"
+                extraClasses += " cloudy"
+            } else if (weatherID === 803) {
+                // Clear
+                weatherDescription = "Broken Clouds"
+                extraClasses += " cloudy"
+            } else if (weatherID === 804) {
+                // Clouds
+                weatherDescription = "Overcast"
+                extraClasses += " cloudy"
+            }
+
+            // Pick icon
+            iconURL = "http://openweathermap.org/img/wn/" + this.state.weather.weather[0].icon + "@4x.png"
+        }
+        return (
+            <div>
                 <Card>
-                    <Card.Header>Weather</Card.Header>
-                    <Card.Body className={
-                        typeof this.state.weather.main != "undefined" ?
-                            this.state.weather.main.temp > 18 ?
-                                "WeatherCard hot" :
-                                "WeatherCard cold" :
-                            "WeatherCard"
-                    }>
+                    <Card.Header>
+                        <div className="date">Updated: {this.state.lastUpdated}</div>
+                        Weather
+                    </Card.Header>
+                    <Card.Body className={"WeatherCard" + extraClasses}>
                         <Card.Text as="div">
                             {typeof this.state.weather.main != "undefined" ? (
                                 <div>
-                                    <div className="location-container">
-                                        <div className="date">Updated: {this.state.lastUpdated}</div>
-                                    </div>
                                     <div className="weather-container">
-                                        <div className="temperature">
-                                            {Math.round(this.state.weather.main.temp)}°F
-                                </div>
-                                        <div className="weather">{this.state.weather.weather[0].main}</div>
+                                        <div className="temperature">{Math.round(this.state.weather.main.temp)}°F</div>
+                                        <div className="weather"><img alt="{weatherDescription}" src={iconURL} /><br />{weatherDescription}</div>
                                     </div>
                                 </div>
                             ) : (

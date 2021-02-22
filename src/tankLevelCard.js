@@ -25,13 +25,13 @@ class TankLevelCard extends React.Component {
             label={`${now}%`}
         />;
         return (
-            <div class="col-4">
+            <div>
                 <Card
                     class="card tankLevelCard"
                     onClick={this.openModal.bind(this)}
                 >
                     <div class="card-header">
-                        Cistern Level
+                        🌊  Cistern Level
                         </div>
                     <div class="card-body">
                         {progressInstance}
@@ -56,17 +56,17 @@ function TankLevelModal(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
             size="xl"
-            >
+        >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Water Levels
+                    🌊 Water Levels
           </Modal.Title>
             </Modal.Header>
             <Modal.Body className="show-grid">
                 <Container>
                     <Row>
                         <Plot
-                            style = {{width:"100%"}}
+                            style={{ width: "100%" }}
                             data={[
                                 {
                                     x: props.levels.x,
