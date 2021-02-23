@@ -14,15 +14,15 @@ class HouseDoorCard extends React.Component {
                     <Card.Body>
                         <Row>
                             <Col>
-                                <h5 class="card-title">Front</h5>
+                                <h5 className="card-title">Front</h5>
                                 <Door isOpen={this.props.FrontOpen} />
                             </Col>
                             <Col>
-                                <h5 class="card-title">Kitchen</h5>
+                                <h5 className="card-title">Kitchen</h5>
                                 <Door isOpen={this.props.KitchenOpen} />
                             </Col>
                             <Col>
-                                <h5 class="card-title">Dining Room</h5>
+                                <h5 className="card-title">Dining Room</h5>
                                 <Door isOpen={this.props.DiningRoomOpen} />
                             </Col>
                         </Row>

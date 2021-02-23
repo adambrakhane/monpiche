@@ -11,15 +11,15 @@ class GarageDoorCard extends React.Component {
         <Card>
           <Card.Header>
             🚗 Garage Doors
-      </Card.Header>
+          </Card.Header>
           <Card.Body>
             <Row>
               <Col>
-                <h5 class="card-title">Left</h5>
+                <h5 className="card-title">Left</h5>
                 <Door isOpen={this.props.LeftOpen} />
               </Col>
               <Col>
-                <h5 class="card-title">Right</h5>
+                <h5 className="card-title">Right</h5>
                 <Door isOpen={this.props.RightOpen} />
               </Col>
             </Row>

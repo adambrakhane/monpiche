@@ -27,7 +27,7 @@ class StatusBar extends React.Component {
         <Button variant="primary" onClick={this.props.openControls}>Controls</Button>
         <Clock />
         {/* <hr />
-        <p class="mb-0">
+        <p className="mb-0">
           Whenever you need to, be sure to use margin utilities to keep things nice
           and tidy.
         </p> */}

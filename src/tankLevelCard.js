@@ -27,13 +27,13 @@ class TankLevelCard extends React.Component {
         return (
             <div>
                 <Card
-                    class="card tankLevelCard"
+                    className="card tankLevelCard"
                     onClick={this.openModal.bind(this)}
                 >
-                    <div class="card-header">
+                    <div className="card-header">
                         🌊  Cistern Level
                         </div>
-                    <div class="card-body">
+                    <div className="card-body">
                         {progressInstance}
                     </div>
                 </Card>

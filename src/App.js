@@ -42,7 +42,21 @@ export default class App extends React.Component {
     }
     // Check tank level stub
     setInterval(() => {
-      var lvl = Math.floor((Math.random() * 100) + 1);
+      // Generate a random starting point and then add and subtract little bits
+      var lvl = this.state.tankLevel
+      if (lvl <= 0) {
+        lvl = Math.floor((Math.random() * 20) + 1) + 50; // random number between 50 and 70
+      } else {
+        var delta = Math.floor(Math.random() * 4) +1
+        if (Math.random() > 0.5) {
+          // Add
+          lvl += delta
+        } else {
+          // Subtract
+          lvl -= delta
+        }
+      }
+
       this.setState({ tankLevel: lvl })
 
       var levels = this.state.tankLevels
@@ -89,8 +103,8 @@ export default class App extends React.Component {
             <Col xs="8">
               <GarageDoorCard LeftOpen={this.state.garageDoors.left} RightOpen={this.state.garageDoors.right} />
               <HouseDoorCard DiningRoomOpen={this.state.houseDoors.diningRoom} FrontOpen={this.state.houseDoors.front} KitchenOpen={this.state.houseDoors.kitchen} />
-              <TankLevelCard level={this.state.tankLevel} levels={this.state.tankLevels} />
               <EnvironmentMonitor />
+              <TankLevelCard level={this.state.tankLevel} levels={this.state.tankLevels} />
             </Col>
           </Row>
         </Container>
