@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <title>WebSocket Example</title>
+</head>
+
+<body>
+    <pre id="fileData">Loading...</pre>
+    <script type="text/javascript">
+        (function() {
+            var data = document.getElementById("fileData");
+            var conn = new WebSocket("ws://localhost:8080/dataStream");
+            conn.onclose = function(evt) {
+                data.textContent = 'Connection closed';
+                console.log(evt)
+            }
+            conn.onmessage = function(evt) {
+                console.log('file updated');
+                console.log(JSON.parse(evt.data))
+                    // console.log(evt)
+                data.textContent += evt.data + "\n";
+            }
+            conn.onopen = function(evt) {
+                data.textContent = "Listening!"
+            }
+        })();
+    </script>
+</body>
+
+</html>
